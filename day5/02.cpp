@@ -4,8 +4,8 @@
 
 int main()
 {
-    int val = 0;
-    int sum = 0;
+    // int val = 0;
+    // int sum = 0;
 
     // while (val <= 10) {
     //     sum += val; // 累加val的值
