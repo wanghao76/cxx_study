@@ -39,3 +39,48 @@ int sum_list(std::initializer_list<int> il)
 
     return sum;
 }
+
+// void f1(int, int) {
+//     std::cout << "f1(int, int) called" << std::endl;
+//     // 调用f2函数
+//     // f1(1, 2);
+// }
+
+// void f1(const double, const int) {
+//     std::cout << "f1(const double, const int) called" << std::endl;
+//     // 调用f2函数
+//     // f1(1, 2);
+// }
+
+// void f1(double height, int weight, int age) {
+//     std::cout << "f1 called with height: " << height 
+//               << ", weight: " << weight 
+//               << ", age: " << age << std::endl;
+//     // 这里可以添加更多的逻辑
+// }
+
+// void f1() {
+//     std::cout << __func__ << " called" << std::endl;
+// }
+
+void f1(int a) {
+    std::cout << __func__ << " called with int a: " << a << std::endl;
+}
+
+// void f1(double a) {
+//     std::cout << __func__ << " called with double a: " << a << std::endl;
+// }
+
+// void f1(int a, int b) {
+//     std::cout << __func__ << " called with int a: " << a << ", int b: " << b << std::endl;
+// }
+
+// void f1(int a, double b) {
+//     std::cout << __func__ << " called with int a: " << a << ", double b: " << b << std::endl;
+// }
+
+void f1(double a, double b) {
+    std::cout << __func__ << " called with double a: " << a 
+                          << " and default b: " << b << std::endl;
+}
+
