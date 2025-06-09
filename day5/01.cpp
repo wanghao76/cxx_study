@@ -10,14 +10,14 @@ int main()
     // vector<int> vec1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}; // 初始化一个vector
     // vector<int>::const_iterator it = vec1.begin(); 
 
-    // // 这样遍历更加简洁，高效，不宜与发生错误
-    // // 先进行 it++, 讲it指向下一个元素，然后生成一个原来的副本返回，然后再进行解引用操作。
-    // // 但是在一般的for循环，或者可以用++it的方式来进行遍历的情况下，推荐使用++it的方式，因为不会生成副本，效率更高。
+    // 这样遍历更加简洁，高效，不宜与发生错误
+    // 先进行 it++, 讲it指向下一个元素，然后生成一个原来的副本返回，然后再进行解引用操作。
+    // 但是在一般的for循环，或者可以用++it的方式来进行遍历的情况下，推荐使用++it的方式，因为不会生成副本，效率更高。
 
-    // // 但是这种方式 类似于 *it = toupper(*it++) 的方式，会导致未定义的行为，因为等号两侧都it，且右侧还改变了it的值，因此可能会有两种情况，从而导致编译器无法处理：
-    // // *it = toupper(*it)
-    // // *(it + 1) = toupper(*it)
-    // // 这种情况下，编译器无法确定是哪个操作先执行，因此会导致未定义的行为。
+    // 但是这种方式 类似于 *it = toupper(*it++) 的方式，会导致未定义的行为，因为等号两侧都it，且右侧还改变了it的值，因此可能会有两种情况，从而导致编译器无法处理：
+    // *it = toupper(*it)
+    // *(it + 1) = toupper(*it)
+    // 这种情况下，编译器无法确定是哪个操作先执行，因此会导致未定义的行为。
 
 
     // while (it != vec1.end()) {
@@ -35,7 +35,7 @@ int main()
     // }
     // cout << endl;
 
-    // // 嵌套条件运算符
+    // 嵌套条件运算符
     // string final_core;
     // int grade;
     // while (cin >> grade) {
@@ -89,8 +89,8 @@ int main()
     // std::cout << "a after multiplication: " << a << std::endl; // 输出a的值
 
     // const string* ps; void* pv;
-    // // string *pt = const_cast<string*>(ps); // 将const string*转换为string*
-    // // pv = reinterpret_cast<void*>(pt); //  将string*转换为void*
+    // string *pt = const_cast<string*>(ps); // 将const string*转换为string*
+    // pv = reinterpret_cast<void*>(pt); //  将string*转换为void*
 
     int j = 5, i = 3;
 

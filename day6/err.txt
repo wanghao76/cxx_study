@@ -1,6 +1,0 @@
-./main > out.txt 2> err.txt
-
-标准输出：1， 标准错误：2
-
-Debugging information: main.cpp: in function print_debug at line 52 compiled on 
-Jun  7 2025 at 15:46:56

@@ -63,17 +63,17 @@ int main() {
 
     // std::string s = "hello world!";
 
-    // // 如果要使用string中的下标,则一定要判空!
+    // 如果要使用string中的下标,则一定要判空!
     // if (s.empty()) {
     //     std::cout << "The string is empty." << std::endl;
     //     return 0; // 如果字符串为空，直接返回
     // }
 
-    // // 注意这里使用了 decltype(s.size()) 来声明 i 的类型，这样可以确保 i 的类型与 s.size() 的返回类型一致
-    // // 这样可以避免在比较时出现类型不匹配的问题
-    // // 这里使用了 std::isspace 来检查字符是否是空格字符
-    // // 如果是空格字符或者是末尾，则停止转换
-    // // 注意 i < s.size() && !std::isspace(s[i]); 这里在c++中会先判断&&左侧的i值, 所以&&右侧中s[i]是安全的, 不会越界
+    // 注意这里使用了 decltype(s.size()) 来声明 i 的类型，这样可以确保 i 的类型与 s.size() 的返回类型一致
+    // 这样可以避免在比较时出现类型不匹配的问题
+    // 这里使用了 std::isspace 来检查字符是否是空格字符
+    // 如果是空格字符或者是末尾，则停止转换
+    // 注意 i < s.size() && !std::isspace(s[i]); 这里在c++中会先判断&&左侧的i值, 所以&&右侧中s[i]是安全的, 不会越界
     // for (decltype(s.size()) i = 0; 
     //      i < s.size() && !std::isspace(s[i]); ++i) {
     //     s[i] = std::toupper(s[i]); // 将小写字母转换为大写字母

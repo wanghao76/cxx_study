@@ -17,7 +17,8 @@ int main() {
     // for (const auto &s : vec3) {
     //     std::cout << s << std::endl; // 输出每个字符串
     // }
-    // // decltype(vec2.size()) n = 10;
+    
+    // decltype(vec2.size()) n = 10;
     
     // std::vector<std::string>::size_type n = 10;
 
@@ -57,7 +58,7 @@ int main() {
     //     std::cout << str << std::endl; // 输出每个字符串
     // }
 
-    // // 转换字符串中的小写字母为大写字母
+    // 转换字符串中的小写字母为大写字母
     // std::vector<std::string> s_v;
     // std::string s;
     // while(getline(std::cin, s)) {
@@ -67,7 +68,7 @@ int main() {
     //     s_v.push_back(s); // 将输入的字符串添加到 vector 中
     // }
 
-    // // std::cout << "You entered: " << std::endl;
+    // std::cout << "You entered: " << std::endl;
     // for (auto &str : s_v) {
     //     for (auto &c : str) {
     //         if (std::islower(c)) { // 检查字符是否是小写字母
@@ -97,13 +98,13 @@ int main() {
     // }
     // std::cout << std::endl;
 
-    // // 输出第1个和最后1个元素的和，第2个和倒数第2个元素的和，以此类推
+    // 输出第1个和最后1个元素的和，第2个和倒数第2个元素的和，以此类推
     // std::cout << "首尾对应元素的和：" << std::endl;
     // size_t sz = nums.size();
     // for (size_t i = 0; i < sz / 2; ++i) {
     //     std::cout << nums[i] + nums[sz - 1 - i] << " ";
-    // }
-    // // 如果元素个数为奇数，中间那个元素单独输出
+
+    // 如果元素个数为奇数，中间那个元素单独输出
     // if (sz % 2 == 1) {
     //     std::cout << nums[sz / 2];
     // }
