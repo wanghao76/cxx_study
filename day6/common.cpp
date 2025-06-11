@@ -42,7 +42,7 @@ int sum_list(std::initializer_list<int> il)
 
 // void f1(int, int) {
 //     std::cout << "f1(int, int) called" << std::endl;
-//     // 调用f2函数
+     // 调用f2函数
 //     // f1(1, 2);
 // }
 
