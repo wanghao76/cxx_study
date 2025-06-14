@@ -19,15 +19,21 @@ public:
     }
 
 
-    // *成员函数的运算符重载 (可以选择成员/非成员，但是同一类型只能选择一个，否则编译器会不知道选哪个)
+    // *成员函数的运算符重载实现
+    // (可以选择成员/非成员，但是同一类型只能选择一个，否则编译器会不知道选哪个)
     // Complex& __doapl(Complex* ths, const Complex& other);
     // Complex& operator += (const Complex& other);
+
+    // 成员函数（complex + double）实现
+    // Complex operator + (double rhs);
 
     // 这里也可以选择用友元
     // 其实友元函数声明等价于一次普通的函数声明
     // 但是如果你希望在不包含类的地方也能用，比如其他的cpp文件，建议在类外再写一遍声明。
     friend Complex& __doapl(Complex& lhs, const Complex& rhs);
     friend Complex& operator += (Complex& lhs, const Complex& rhs);
+
+    
 
 private:
 
@@ -50,6 +56,14 @@ private:
 //     return *ths;
 // }
 
+// 成员函数complex + double的实现。
+// *但是注意用成员函数无法完整实现operator + 的所有功能。
+// *例如double + complex就无法实现了。
+// inline Complex Complex::operator+ (double rhs) {
+//     std::cout << "operator + (complex, double) called" << std::endl;
+//     return Complex(this->get_x() + rhs, this->get_y());
+// }
+
 // *非成员函数 + 友元实现类似效果
 Complex& __doapl(Complex& lhs, const Complex& rhs);
 // 注意，如果是非成员函数就没有this指针了，所以需要传入两个参数。
@@ -64,7 +78,20 @@ inline Complex operator + (const Complex& lhs, const Complex& rhs) {
     // *临时对象
     // 一般用在不需要知道他的名字，可能到下一行他的生命周期就结束了，临时的
     // 类似这种classname(), classname(double, double)的写法都是临时对象。
+    std::cout << "operator + (complex, complex) called" << std::endl;
     return Complex(lhs.get_x() + rhs.get_x(), lhs.get_y() + rhs.get_y());
+}
+
+//* 注意为什么operator + 不写成成员函数
+// 因为成员函数的左操作数必须是本身(this), 因此double+complex就不行了。
+inline Complex operator + (const Complex& lhs, double rhs) {
+    std::cout << "operator + (complex, double)called" << std::endl;
+    return Complex(lhs.get_x() + rhs, lhs.get_y());
+}
+
+inline Complex operator + (double lhs, const Complex& rhs) {
+    std::cout << "operator + (double, complex)called" << std::endl;
+    return Complex(lhs + rhs.get_x(), rhs.get_y());
 }
 
 // 如果只有一个形参，那这里就是负号，+同理。会根据形参个数判断
