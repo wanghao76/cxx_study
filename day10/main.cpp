@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Myclass.h"
+#include "MyClass.h"
 
 int main() {
     // std::cout << "Hello, World!" << std::endl;
@@ -13,7 +13,8 @@ int main() {
 
     MyClass obj1(10.0, 20.0);
     MyClass obj2(5.0, 15.0);
-    obj1 = obj1 + obj2; // 使用运算符重载进行加法操作
+    // obj1 = obj1 + obj2; // 使用运算符重载进行加法操作
+    obj1 += obj2; // 使用运算符重载进行加法操作
     std::cout << "Result of addition: x = " << obj1.get_x() 
               << ", y = " << obj1.get_y() << std::endl; // 输出结果
 
