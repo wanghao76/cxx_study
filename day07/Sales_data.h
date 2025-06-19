@@ -47,4 +47,8 @@ std::ostream& print(std::ostream&, const Sales_data&);
 // 同理
 std::istream& read(std::istream&, Sales_data&);
 
+std::istream& operator>>(std::istream& is, Sales_data& item);
+
+std::ostream& operator<<(std::ostream& os, const Sales_data& item);
+
 #endif

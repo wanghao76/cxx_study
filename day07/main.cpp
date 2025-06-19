@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iterator>
 #include "Sales_data.h"
 
 int main() {
@@ -26,12 +27,33 @@ int main() {
     //             total = trans; // 重置总计为当前交易
     //         }
     //     }
-
     //     print(std::cout, total) << std::endl; // 输出最后一个总计
     // } else {
     //     std::cerr << "No data?!" << std::endl; // 如果没有输入数据，输出错误信息
     //     return 1; // 返回1表示错误
     // }
+
+    std::istream_iterator<Sales_data> in_iter(std::cin);
+    std::istream_iterator<Sales_data> in_eof;
+
+    std::ostream_iterator<Sales_data> out_iter(std::cout, " ");
+    
+    Sales_data total = *in_iter++;
+
+    while (in_iter != in_eof) {
+        Sales_data trans = *in_iter++;
+        if (total.isbn() == trans.isbn()) {
+            total.combine(trans);
+        } else {
+            out_iter = total;
+            // std::cout << std::endl;
+            total = trans; // 重置总计为当前交易
+        }
+    }
+    out_iter = total;
+    std::cout << std::endl;
+
+    
 
     // 4. read函数的连续调用：读取两条销售数据
     // Sales_data data1, data2;
