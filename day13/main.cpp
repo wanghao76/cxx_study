@@ -60,7 +60,7 @@ int main()
     // vec_num.erase(it, vec_num.end());
 
     // ostream迭代器绑定cout, 并设定每个输出的后缀值
-    // std::ostream_iterator<int> out_iter(std::cout, " ");
+    // std::ator<int> out_iter(std::cout, " ");
 
     // *2.1 for循环
     // for (auto &it : vec_num) {
