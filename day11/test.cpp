@@ -271,3 +271,15 @@ bool insert_flist(std::forward_list<std::string>& f_list, const std::string& str
 
     return true;
 }
+// using namespace std;
+
+// class TwoDoubles {
+//     double a;
+//     double b;
+// };
+
+// int main() {
+//     cout << "Size of double: " << sizeof(double) << endl;          // 通常是 8
+//     cout << "Size of TwoDoubles: " << sizeof(TwoDoubles) << endl; // 通常是 16
+//     return 0;
+// }
