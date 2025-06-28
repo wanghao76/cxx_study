@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Complex.h"
+#include "String.h"
 
 int main() {
     // std::cout << "Hello, World!" << std::endl;
@@ -22,14 +23,32 @@ int main() {
     // obj1 = value + obj1;   // operator + (double, complex)called
 
     // 复数 + 实数
-    double value = 3.0;    //operator + (complex, double)called
-    obj1 = obj1 + value; 
+    // double value = 3.0;    //operator + (complex, double)called
+    // obj1 = obj1 + value; 
 
-    std::cout << "Results of addition: x = " << obj1.get_x() 
-              << ", y = " << obj1.get_y() << std::endl; // 输出结果
-    std::cout << "obj1 conj is: " << conj(obj1) << std::endl
-              << "obj1 is" << obj1 << std::endl;
-    
+    // std::cout << "Results of addition: x = " << obj1.get_x() 
+    //           << ", y = " << obj1.get_y() << std::endl; // 输出结果
+    // std::cout << "obj1 conj is: " << conj(obj1) << std::endl
+    //           << "obj1 is" << obj1 << std::endl;
 
+
+    // String实现 深拷贝
+    {
+        String s1;
+        String s2("hello");
+        std::cout << "s2: " << s2 << std::endl;
+        String *p = new String("hello");
+        std::cout << "p-> : " << *p << std::endl;
+
+        delete p;
+    }
+
+    {
+        String s1("Hello");
+        std::cout << "s1: " << s1 << std::endl;
+        // String s2(s1);
+        String s2 = s1;
+        std::cout << "s2: " << s2 << std::endl;
+    }
     return 0;
 }
