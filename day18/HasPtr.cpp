@@ -6,12 +6,12 @@
 
 // HasPtr& HasPtr::operator=(const HasPtr& hpr)
 // {
-//     // self assignment check
+    // self assignment check
 //     if (this == &hpr) {
 //         return *this;
 //     }
 
-//     // temp存在的目的是: new异常发生时，原资源保持不变。
+    // temp存在的目的是: new异常发生时，原资源保持不变。
 //     std::string *temp_ps = new std::string(*hpr.ps);  // 先分配新资源
 //     delete ps;  // 再删除旧资源
 //     ps = temp_ps;

@@ -69,12 +69,12 @@ void swap(HasPtr &lhs, HasPtr &rhs) {
 // 因此不存在内存泄漏
 
 // 妈的，谁他妈想出来了，真的妙！！！
-inline 
-HasPtr& HasPtr::operator=(HasPtr hpr) {
-    std::cout << "call the copy assignment function." << std::endl;
-    swap(*this, hpr);
-    return *this;
-}
+// inline 
+// HasPtr& HasPtr::operator=(HasPtr hpr) {
+//     std::cout << "call the copy assignment function." << std::endl;
+//     swap(*this, hpr);
+//     return *this;
+// }
 
 
 
