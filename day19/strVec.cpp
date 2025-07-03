@@ -3,14 +3,21 @@
 
 #include "strVec.h"
 
+std::allocator<std::string> strVec::alloc;
 
 void strVec::push_back(const std::string& str) {
     // 确保有空间容纳新元素
     chk_n_alloc();
     // 在分配的内存中构造，first_free指向下一个空闲空间
     alloc.construct(first_free++, str);
+    std::cout << "call copy constuctor push back" << std::endl;
 }
 
+void strVec::push_back(std::string&& s) {
+    chk_n_alloc();
+    alloc.construct(first_free++, std::move(s));
+    std::cout << "call move constructor push back" << std::endl;
+}
 
 std::pair<std::string*, std::string*>
 strVec::alloc_n_copy (const std::string* begin, const std::string* end)
@@ -24,10 +31,13 @@ strVec::alloc_n_copy (const std::string* begin, const std::string* end)
 void strVec::free()
 {
     if (elements) {
-        for (auto p = first_free; elements != first_free; /* blank */) {
+        for (auto p = first_free; p != elements; /* blank */) {
             alloc.destroy(--p);
         }
-        alloc.deallocate(elements, cap - elements);
+        if (cap && cap > elements) {
+            // 释放分配的内存
+            alloc.deallocate(elements, cap - elements);
+        }
     }
 
     // alloc.destroy()
@@ -40,7 +50,7 @@ strVec::strVec(const strVec& sv)
     first_free = cap = it.second;
 }
 
-strVec::strVec(std::initializer_list<std::string>& sl)
+strVec::strVec(const std::initializer_list<std::string>& sl)
 {
     auto newdata = alloc_n_copy(sl.begin(), sl.end());
     elements = newdata.first;
@@ -69,19 +79,24 @@ void strVec::reallocate()
     
     // 分配新内存
     auto newdata = alloc.allocate(new_capacity);
-    std::string* elem = elements; // 旧数组下一个元素
-    std::string* dest = newdata; // 新数组下一个空闲位置
-    for (std::size_t i = 0; i < size(); ++i) {
+    // std::string* elem = elements; // 旧数组下一个元素
+    // std::string* dest = newdata; // 新数组下一个空闲位置
+    // for (std::size_t i = 0; i < size(); ++i) {
         // std::move的作用类似于拷贝指向string的指针，而不是拷贝元素
         // 相当于没有重新开辟内存空间，只是新数组接管了其使用权而已。
         // 目的在于节省内存开销。
-        alloc.construct(dest++, std::move(*elem++));
-    }
+    //     alloc.construct(dest++, std::move(*elem++));
+    // }
+
+    // 也可以不用for循环，直接用移动迭代器，将左值转为右值迭代器
+    // 由于传的是右值，因此construct会使用移动构造
+    auto last = std::uninitialized_copy(std::make_move_iterator(begin()),
+                                        std::make_move_iterator(end()), newdata);
     free(); // 构造完，即释放旧的内存空间
 
     // 更新数据结构
     elements = newdata;
-    first_free = dest;
+    first_free = last;
     cap = elements + new_capacity;
 }
 
@@ -95,6 +110,7 @@ void strVec::alloc_n_move(size_t capacity)
     for (size_t i = 0; i != size(); ++i) {
         alloc.construct(dest++, std::move(*elem++));
     }
+    free(); // 释放旧的内存空间
     elements = newdata;
     first_free = dest;
     cap = elements + capacity;
@@ -140,7 +156,7 @@ elements(s.elements), first_free(s.first_free), cap(s.cap) // 接管s中的资�
     s.elements = s.first_free = s.cap = nullptr;
 }
 
-strVec& strVec::operator=(strVec&& s)
+strVec& strVec::operator=(strVec&& s) noexcept
 {
     if (this != &s) {
         // 释放原有内存

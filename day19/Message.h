@@ -17,6 +17,9 @@ public:
     Message& operator=(const Message&);
     ~Message();
 
+    Message(Message&&);
+    Message& operator=(Message&&);
+
     void save(Folder&); 
     void remove(Folder&);
 
@@ -26,6 +29,8 @@ public:
     void remFolder(Folder* f) {
         folders.erase(f);
     }
+
+    void move_folders(Message*);
 
 private:
     std::string contents;

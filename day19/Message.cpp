@@ -58,3 +58,34 @@ Message& Message::operator=(const Message &msg)
 
     return *this;
 }
+
+void Message::move_folders(Message* m)
+{
+    // 使用set的移动赋值
+    folders = std::move(m->folders);
+
+    for (auto f : folders) {
+        f->remMsg(m);
+        f->addMsg(this);
+    }
+
+    m->folders.clear();
+}
+
+// 由于set在insert的过程中可能会抛出ball_alloc的异常，因此这里不设置noexcept
+Message::Message(Message&& m) : contents(std::move(m.contents))
+{
+    move_folders(&m);
+}
+
+Message& Message::operator=(Message&& rhs)
+{
+    if (this != &rhs) {
+        remove_from_folders();
+        contents = std::move(rhs.contents);
+        move_folders(&rhs);
+    }
+
+    return *this;
+}
+

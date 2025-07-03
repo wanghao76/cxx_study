@@ -29,6 +29,7 @@ public:
 
     // add & delete
     void push_back(const std::string& x) { data->push_back(x); }
+    void push_back(std::string&& x) { data->push_back(std::move(x)); }
     void pop_back();
 
     // visit

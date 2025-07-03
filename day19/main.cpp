@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "String.h"
+#include "strVec.h"
 
 // Test reference to http://coolshell.cn/articles/10478.html
 
@@ -25,53 +26,53 @@ String baz()
 
 int main()
 {
-    char text[] = "world";
+    // char text[] = "world";
 
-    String s0;   // default constructor
-    String s1("hello");  // String(const char*) constructor
-    String s2(s0);   // copy constructor
-    String s3 = s1;  // copy constructor
-    String s4(text);    // String(const char*) constructor
+    // String s0;   // default constructor
+    // String s1("hello");  // String(const char*) constructor
+    // String s2(s0);   // copy constructor
+    // String s3 = s1;  // copy constructor
+    // String s4(text);    // String(const char*) constructor
     // s2 = s1;   // copy-assignment
 
     // foo(s1);
     // bar(s1);
     // foo("temporary");   // String(const char*) constructor
     // bar("temporary");    // String(const char*) constructor
-    String s5 = baz();    // copy constructor
+    // String s5 = baz();    // copy constructor
 
-    std::vector<String> svec;
-    svec.reserve(1);
-    svec.push_back(s0);
-    std::cout << svec.capacity() << std::endl;
-    std::cout << "--------------------------" << std::endl;
-    svec.push_back(s1);
-    std::cout << svec.capacity() << std::endl;
-    std::cout << "--------------------------" << std::endl;
+    // std::vector<String> svec;
+    // svec.reserve(1);
+    // svec.push_back(s0);
+    // std::cout << svec.capacity() << std::endl;
+    // std::cout << "--------------------------" << std::endl;
+    // svec.push_back(s1);
+    // std::cout << svec.capacity() << std::endl;
+    // std::cout << "--------------------------" << std::endl;
 
-    svec.push_back(s2);
-    std::cout << svec.capacity() << std::endl;
-    std::cout << "--------------------------" << std::endl;
+    // svec.push_back(s2);
+    // std::cout << svec.capacity() << std::endl;
+    // std::cout << "--------------------------" << std::endl;
 
-    svec.push_back(s3);
-    std::cout << svec.capacity() << std::endl;
-    std::cout << "--------------------------" << std::endl;
+    // svec.push_back(s3);
+    // std::cout << svec.capacity() << std::endl;
+    // std::cout << "--------------------------" << std::endl;
 
-    svec.push_back(s4);
-    std::cout << svec.capacity() << std::endl;
-    std::cout << "--------------------------" << std::endl;
+    // svec.push_back(s4);
+    // std::cout << svec.capacity() << std::endl;
+    // std::cout << "--------------------------" << std::endl;
 
-    svec.push_back(s5);
-    std::cout << svec.capacity() << std::endl;
-    std::cout << "--------------------------" << std::endl;
+    // svec.push_back(s5);
+    // std::cout << svec.capacity() << std::endl;
+    // std::cout << "--------------------------" << std::endl;
 
-    svec.push_back(baz());
-    std::cout << svec.capacity() << std::endl;
-    std::cout << "--------------------------" << std::endl;
+    // svec.push_back(baz());
+    // std::cout << svec.capacity() << std::endl;
+    // std::cout << "--------------------------" << std::endl;
 
-    svec.push_back("good job");
-    std::cout << svec.capacity() << std::endl;
-    std::cout << "--------------------------" << std::endl;
+    // svec.push_back("good job");
+    // std::cout << svec.capacity() << std::endl;
+    // std::cout << "--------------------------" << std::endl;
 
 
     // 每次push_back都会调用一次拷贝构造。
@@ -81,4 +82,11 @@ int main()
     // for (const auto &s : svec) {
     //     std::cout << s.c_str() << std::endl;
     // }
+
+    strVec vec;
+    std::string s = "something or other";
+    vec.push_back(s);
+    vec.push_back("done");
+    
+    return 0;
 }

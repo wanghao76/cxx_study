@@ -15,15 +15,24 @@ public:
     HasPtr(const HasPtr& hpr) : ps(new std::string(*hpr.ps)), i(hpr.i) { 
         std::cout << "call the copy conductor function." << std::endl;
     }
+    HasPtr(HasPtr&& hpr) noexcept : ps(hpr.ps), i(hpr.i) { hpr.ps = nullptr; }
 
     // HasPtr& operator=(const HasPtr& hpr);
 
-    // copy and swap
-    HasPtr& operator=(HasPtr hpr) {
-        std::cout << "call the copy assignment function." << std::endl;
-        swap(*this, hpr);
-        return *this;
-    }
+    // copy and swap，这样一来，赋值运算符即是拷贝赋值运算符也是移动赋值运算符。
+    // 非引用的形参取决于实参的类型：左值（引用类型）被拷贝，右值被移动
+
+    // 虽然这样实现可行，但是从底层效率来看，并不理想
+    // 是因为调用的swap操作每次交换时，都会创建临时空间，用来存放临时变量的值。
+    // HasPtr& operator=(HasPtr hpr) {
+    //     std::cout << "call the copy assignment function." << std::endl;
+    //     swap(*this, hpr);
+    //     return *this;
+    // }
+
+    // 因此可以定义纯正的，但是这两不能共存哦，不然会引发二义性错误
+    HasPtr& operator=(HasPtr&& hpr) noexcept;
+
 
     const std::string& getPs() const {
 	    return *ps;
