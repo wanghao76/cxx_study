@@ -20,6 +20,8 @@ public:
     strVec(strVec&& s) noexcept;
     strVec& operator=(strVec&& s) noexcept;
 
+    strVec& operator=(const std::initializer_list<std::string> il);
+
     // 可以尝试把成员函数也提供两个版本，一个拷贝元素，一个移动元素
     // 一般来叔用移动元素效率更高更快，但是要注意移后源元素必须不再使用，除非赋值和销毁
     // 接受任何可以转为X类型的版本

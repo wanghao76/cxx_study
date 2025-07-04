@@ -63,3 +63,9 @@ String& String::operator=(const String& s)
     std::cout << "copy-assignment" << std::endl;
     return *this;
 }
+
+std::ostream& operator<<(std::ostream& os, const String& s)
+{
+    os <<  "string value: " << s.begin << std::endl;
+    return os;
+}

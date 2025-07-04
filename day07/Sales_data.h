@@ -22,6 +22,8 @@ struct Sales_data {
     // 通过输入流读取数据的构造函数
     Sales_data (std::istream& is);
 
+    Sales_data& operator+=(const Sales_data&);
+
     // 成员函数
     // 获取ISBN号
     inline std::string isbn() const {
@@ -44,11 +46,17 @@ Sales_data add(const Sales_data&, const Sales_data&);
 // 由于传入的是std::cout, 无法被拷贝，所以是引用类型；同时注意这里的第二个参数是const。
 std::ostream& print(std::ostream&, const Sales_data&);
 
+bool operator==(const Sales_data&, const Sales_data&);
+
+bool operator!=(const Sales_data&, const Sales_data&);
+
 // 同理
 std::istream& read(std::istream&, Sales_data&);
 
 std::istream& operator>>(std::istream& is, Sales_data& item);
 
 std::ostream& operator<<(std::ostream& os, const Sales_data& item);
+
+Sales_data operator+(const Sales_data&, const Sales_data&);
 
 #endif

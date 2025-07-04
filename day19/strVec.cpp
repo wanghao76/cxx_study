@@ -173,3 +173,13 @@ strVec& strVec::operator=(strVec&& s) noexcept
 
     return *this;
 }
+
+// 无需检查自身赋值的情况，因为initializer_list保证il不是自身。
+strVec& strVec::operator=(const std::initializer_list<std::string> il)
+{
+    auto newdata = alloc_n_copy(il.begin(), il.end());
+    free();
+    elements = newdata.first;
+    first_free = cap = newdata.second;
+    return *this;
+}

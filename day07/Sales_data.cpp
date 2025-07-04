@@ -50,3 +50,29 @@ std::ostream& operator<<(std::ostream& os, const Sales_data& item) {
     os << item.isbn() << " " << item.units_sold << " " << item.revenue << " ";
     return os;
 }
+
+Sales_data& Sales_data::operator+=(const Sales_data& s2) 
+{
+    revenue += s2.revenue;
+    units_sold += s2.units_sold;
+    return *this;
+}
+
+Sales_data operator+(const Sales_data& s1, const Sales_data& s2)
+{
+    Sales_data tmp = s1;
+    tmp += s2;
+    return tmp; 
+}
+
+bool operator==(const Sales_data& s1, const Sales_data& s2)
+{
+    return s1.isbn() == s2.isbn() &&
+           s1.revenue == s2.revenue &&
+           s1.units_sold == s2.units_sold;
+}
+
+bool operator!=(const Sales_data& s1, const Sales_data& s2)
+{
+    return !(s1 == s2);
+}

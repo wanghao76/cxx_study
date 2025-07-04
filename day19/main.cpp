@@ -83,10 +83,13 @@ int main()
     //     std::cout << s.c_str() << std::endl;
     // }
 
-    strVec vec;
-    std::string s = "something or other";
-    vec.push_back(s);
-    vec.push_back("done");
-    
+    // strVec vec;
+    // std::string s = "something or other";
+    // vec.push_back(s);
+    // vec.push_back("done");
+
+    String s1("hello"); 
+    std::cout << s1;
+
     return 0;
 }

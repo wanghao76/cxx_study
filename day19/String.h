@@ -8,6 +8,8 @@
 
 class String {
 
+friend std::ostream& operator<<(std::ostream& os, const String& s);
+
 public:
     String() : begin(nullptr), end(nullptr) { std::cout << "default constructor" << std::endl; }
     String(const char *);
@@ -30,5 +32,7 @@ private:
     char* begin;
     char* end;
 };
+
+std::ostream& operator<<(std::ostream& os, const String& s);
 
 #endif
