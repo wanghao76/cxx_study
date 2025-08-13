@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <set>
+#include <memory>
 
 
 class Quote {
@@ -43,6 +45,17 @@ public:
 
     virtual double net_price(std::size_t n = 20) const {
         return n * price;
+    }
+
+    // 模拟虚拷贝
+    // const & 限定此函数只能被const&左值对象调用
+    virtual Quote* clone() const & {
+        return new Quote(*this);
+    }
+
+    // 右值
+    virtual Quote* clone() && {
+        return new Quote(std::move(*this));
     }
 
     virtual ~Quote() {   // 对析构函数进行动态绑定
@@ -110,6 +123,14 @@ public:
         }
     }
 
+    DiscQuote* clone() const & override {
+        return new DiscQuote(*this);
+    }
+
+    DiscQuote* clone() && override {
+        return new DiscQuote(std::move(*this));
+    }
+
     virtual ~DiscQuote() {
         std::cout << "DiscQuote destructor..." << std::endl;
     }
@@ -157,5 +178,38 @@ public:
 //     std::size_t min_qty = 0;
 //     double discount = 0.0;
 // };
+
+
+class Basket {
+
+public:
+
+    // 但是这样其实是让用户自己负责处理动态内存，我们其实可以通过模拟虚拷贝的技术，来实现add_item自处理动态内存。
+    void add_item(const std::shared_ptr<Quote>& sale) {
+        items.insert(sale);
+    }
+
+    void add_item(const Quote& sale) {          // 拷贝给定对象
+        items.insert(std::shared_ptr<Quote>(sale.clone()));
+    }
+
+    void add_item(Quote&& sale) {               // 移动给定对象
+        items.insert(std::shared_ptr<Quote>(std::move(sale).clone()));
+    }
+
+    double total_receipt(std::ostream& os) const;
+
+private:
+    // 这里也只是需要访问智能指针中绑定的顺序，如果不加引用就会引发拷贝构造，增加引用计数，形成副本，消耗资源
+    static bool compare(const std::shared_ptr<Quote>& lhs,
+                        const std::shared_ptr<Quote>& rhs) {
+        return lhs->isbn() < rhs->isbn();
+    }
+    std::multiset<std::shared_ptr<Quote>, decltype(compare)*> items{compare};
+};
+
+
+double print_total(std::ostream& os, 
+                    const Quote& item, std::size_t n);
 
 #endif // QUOTE_H

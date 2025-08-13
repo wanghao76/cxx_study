@@ -4,15 +4,6 @@
 
 #include "Quote.h"
 
-double print_total(std::ostream& os, 
-                    const Quote& item, std::size_t n)
-{
-    double ret = item.net_price(n);
-    os << "ISBN: " << item.isbn() << " # sold: " << n   
-    << " total due: " << ret << std::endl;
-    return ret;
-}
-
 void test1526()
 {
     DiscQuote discq("978-7-121-15535-2", 100, 2, 0.2);    // 派生类对象
@@ -79,6 +70,18 @@ void test1529()
 
 }
 
+void test1530()
+{
+    Basket item;
+    for (auto i = 0; i < 4; ++i) 
+        // 不少于 2 本打折
+        item.add_item(DiscQuote("978-7-121-15535-2", 100, 2, 0.2));
+    for (auto i = 0; i < 6; ++i)
+        // 不少于 5 本打折
+        item.add_item(DiscQuote("978-7-121-15535-1", 100, 5, 0.5));
+    item.total_receipt(std::cout);
+}
+
 int main()
 {
     // 动态绑定只有我们通过指针或者引用调用虚函数时才会发生
@@ -95,6 +98,6 @@ int main()
     // 抽象基类不允许被定义。
     // DiscQuote disc("1001", 20);
 
-    test1529();
+    test1530();
     return 0;
 }
